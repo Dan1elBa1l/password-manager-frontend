@@ -1,0 +1,22 @@
+{
+  "name": "webtech-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dan1elBa1l/password-manager-frontend.git"
+  },
+  "author": "Dan1elBa1l",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dan1elBa1l/password-manager-frontend/issues"
+  },
+  "homepage": "https://github.com/Dan1elBa1l/password-manager-frontend#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
