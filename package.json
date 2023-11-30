@@ -1,22 +1,25 @@
 {
   "name": "webtech-frontend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "jest"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dan1elBa1l/password-manager-frontend.git"
+  "dependencies": {
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
   },
-  "author": "Dan1elBa1l",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dan1elBa1l/password-manager-frontend/issues"
-  },
-  "homepage": "https://github.com/Dan1elBa1l/password-manager-frontend#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vue/test-utils": "^2.4.1",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "jsdom": "^22.1.0",
+    "vite": "^4.4.11",
+    "vitest": "^0.34.6"
   }
 }
