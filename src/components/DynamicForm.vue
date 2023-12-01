@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1> Welcome to your Password-Manager</h1>
     <!-- Formular zum Hinzufügen von Passwörtern -->
     <form @submit.prevent="submitPassword">
       <input type="text" v-model="passwordData.service" placeholder="Service" required>
@@ -8,9 +9,10 @@
       <input type="text" v-model="passwordData.description" placeholder="Description">
       <button type="submit">Submit</button>
     </form>
-
     <!-- Button, um Passwörter anzuzeigen -->
     <button @click="fetchPasswords" v-if="!showPasswords">Show Passwords</button>
+    <!-- Button, um Passwörter zu verstecken -->
+    <button @click="hidePasswords" v-if="showPasswords">Hide Passwords</button>
 
     <!-- Anzeige der abgerufenen Passwörter -->
     <div v-if="showPasswords">
@@ -73,7 +75,10 @@ export default {
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+    hidePasswords() {
+      this.showPasswords = false; // Verstecke die Passwörter
     }
   }
-}
+};
 </script>
