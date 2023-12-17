@@ -7,6 +7,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <div>
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <router-link to="/passwords">Passwords</router-link>
+        <RouterLink to="/credit-card">Credit Cards</RouterLink>
         <RouterLink to="/PasswordGenerator">Password Generator</RouterLink>
       </nav>
     </div>
@@ -37,8 +39,10 @@ nav a.router-link-exact-active {
   color: var(--color-text);
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+nav a.router-link-exact-active {
+  color: var(--color-text);
+  background-color: grey; /* Hinzufügen eines grauen Hintergrunds für aktive Tabs */
+  border-radius: 4px; /* Optional: Fügt abgerundete Ecken hinzu */
 }
 
 nav a {

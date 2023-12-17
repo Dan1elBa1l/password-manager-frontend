@@ -10,13 +10,13 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: inherit; /* Erben Sie die Textfarbe von der Umgebung */
   transition: 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: hsla(0, 0%, 50%, 0.2); /* Grauer Hintergrund beim Hover */
   }
 }
 
