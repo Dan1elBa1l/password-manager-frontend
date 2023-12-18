@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import DynamicForm from '@/components/DynamicForm.vue'; // Pfad anpassen, falls nötig
+import DynamicForm from '@/components/DynamicFormPW.vue'; // Pfad anpassen, falls nötig
 
 export default {
   components: {

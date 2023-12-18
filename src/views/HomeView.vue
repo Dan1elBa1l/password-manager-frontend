@@ -4,9 +4,9 @@
 
     <!-- Hinzufügen der Links -->
     <div class="links">
-      <RouterLink to="/passwords">Passwords </RouterLink>
-      <RouterLink to="/credit-card">Credit Cards </RouterLink>
-      <RouterLink to="/passwordGenerator">Password Generator </RouterLink>
+      <RouterLink to="/passwords">Passwords</RouterLink>
+      <RouterLink to="/credit-card">Credit Cards</RouterLink>
+      <RouterLink to="/passwordGenerator">Password Generator</RouterLink>
     </div>
   </main>
 </template>
