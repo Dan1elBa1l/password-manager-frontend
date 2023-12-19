@@ -18,9 +18,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/">Home</RouterLink>
-            </li>
-            <li class="nav-item">
               <RouterLink class="nav-link" to="/passwords">Passwords</RouterLink>
             </li>
             <li class="nav-item">
@@ -53,6 +50,7 @@ import { RouterLink, RouterView } from 'vue-router';
 /* Direktes Überschreiben der Bootstrap-Navbar-Farbe */
 .navbar {
   background-color: white !important;
+  border-bottom: 1px solid black; /* Fügt eine dünne schwarze Linie hinzu */
 }
 
 /* Setzt die Schriftfarbe auf Schwarz */
@@ -65,9 +63,7 @@ import { RouterLink, RouterView } from 'vue-router';
     text-decoration: none; /* Entfernt die Textdekoration */
     transition: 0.4s; /* Übergang für den Hover-Effekt */
     border-radius: 5px; /* Rundet die Ecken ab */
-
-    /* Padding hinzufügen, falls nötig, um den Effekt zu verstärken */
-    padding: 5px 10px;
+    padding: 5px 10px; /* Padding hinzufügen */
   }
 
   /* Hover-Effekt für Links */

@@ -22,18 +22,25 @@
       <h3>Generiertes Passwort:</h3>
       <p>{{ generatedPassword }}</p>
     </div>
+    <!-- Hier füge die BottomLineTime-Komponente ein -->
+    <bottom-line-time></bottom-line-time>
   </div>
 </template>
 
 <script>
+import BottomLineTime from '../components/BottomLineTime.vue';
+
 export default {
+  components: {
+    BottomLineTime,
+  },
   data() {
     return {
       passwordLength: 12,
       includeUppercase: true,
       includeNumbers: true,
       includeSpecialChars: false,
-      generatedPassword: ''
+      generatedPassword: '',
     };
   },
   methods: {
@@ -64,8 +71,8 @@ export default {
       }
 
       this.generatedPassword = password;
-    }
-  }
+    },
+  },
 };
 </script>
 
