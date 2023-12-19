@@ -1,57 +1,83 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <header>
-    <div>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/passwords">Passwords</RouterLink>
-        <RouterLink to="/credit-card">Credit Cards</RouterLink>
-        <RouterLink to="/PasswordGenerator">Password Generator</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <!-- Navbar Brand mit Favicon -->
+        <RouterLink class="navbar-brand" to="/">
+          <img src="/icons8-password.gif" alt="Favicon" class="favicon">
+          Passwort-Manager
+        </RouterLink>
 
-  <RouterView />
+        <!-- Navbar Toggle für kleinere Bildschirme -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/">Home</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/passwords">Passwords</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/credit-card">Credit Cards</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/PasswordGenerator">Password Generator</RouterLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Router-View -->
+    <RouterView />
+  </div>
 </template>
 
+<script setup>
+import { RouterLink, RouterView } from 'vue-router';
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+/* Favicon-Styling */
+.favicon {
+  height: 30px;
+  margin-right: 10px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+/* Direktes Überschreiben der Bootstrap-Navbar-Farbe */
+.navbar {
+  background-color: white !important;
 }
 
-nav {
-  width: 100%;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 2rem;
+/* Setzt die Schriftfarbe auf Schwarz */
+.custom-navbar {
+  color: black;
+
+  /* Setzt die Schriftfarbe für alle Links in der Navbar auf Schwarz */
+  .nav-link {
+    color: black !important;
+    text-decoration: none; /* Entfernt die Textdekoration */
+    transition: 0.4s; /* Übergang für den Hover-Effekt */
+    border-radius: 5px; /* Rundet die Ecken ab */
+
+    /* Padding hinzufügen, falls nötig, um den Effekt zu verstärken */
+    padding: 5px 10px;
+  }
+
+  /* Hover-Effekt für Links */
+  .nav-link:hover {
+    background-color: hsla(0, 0%, 50%, 0.2); /* Grauer Hintergrund beim Hover */
+  }
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-  background-color: grey; /* Hinzufügen eines grauen Hintergrunds für aktive Tabs */
-  border-radius: 4px; /* Optional: Fügt abgerundete Ecken hinzu */
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+/* Stile für größere Bildschirme */
+@media (min-width: 1024px) {
+  /* Hier können Sie zusätzliche Stile für größere Bildschirme hinzufügen */
 }
 </style>
