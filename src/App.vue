@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <router-link to="/passwords">Passwords</router-link>
+        <RouterLink to="/passwords">Passwords</RouterLink>
         <RouterLink to="/credit-card">Credit Cards</RouterLink>
         <RouterLink to="/PasswordGenerator">Password Generator</RouterLink>
       </nav>
