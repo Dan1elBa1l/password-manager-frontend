@@ -12,16 +12,35 @@
     <!-- Button, um Passwörter anzuzeigen oder zu verstecken -->
     <button @click="toggleShowPasswords">{{ showPasswords ? 'Hide Passwords' : 'Show Passwords' }}</button>
 
-    <!-- Anzeige der abgerufenen Passwörter -->
+    <!-- Tabelle der Passwörter -->
     <div v-if="showPasswords">
-      <ul>
-        <li v-for="password in passwords" :key="password.id">
-          {{ password.service }} - {{ password.username }} - {{ password.password }} - {{ password.description }}
-        </li>
-      </ul>
+      <table>
+        <thead>
+        <tr>
+          <th>Service</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="password in passwords" :key="password.id">
+          <td>{{ password.service }}</td>
+          <td>{{ password.username }}</td>
+          <td>{{ password.password }}</td>
+          <td>{{ password.description }}</td>
+          <td>
+            <button @click="editPassword(password.id)">Edit</button>
+            <button @click="deletePassword(password.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
+
 
 <script>
 import CryptoJS from 'crypto-js';
@@ -64,30 +83,25 @@ export default {
       })
           .then(response => response.json())
           .then(data => {
-            console.log('Success:', data);
+            this.passwords.push(data);
+            this.clearForm();
           })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+          .catch(error => console.error('Error:', error));
     },
-    async fetchPasswords() {
-      try {
-        const response = await fetch('http://localhost:8080/api/passwords');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const encryptedPasswords = await response.json();
-        this.passwords = encryptedPasswords.map(pw => {
-          return {
-            ...pw,
-            username: this.decrypt(pw.username),
-            password: this.decrypt(pw.password),
-            description: this.decrypt(pw.description)
-          };
-        });
-      } catch (error) {
-        console.error('Error:', error);
-      }
+    fetchPasswords() {
+      fetch('http://localhost:8080/api/passwords')
+          .then(response => response.json())
+          .then(data => {
+            console.log('Empfangene Passwörter:', data); // Protokollieren der empfangenen Daten
+            this.passwords = data.map(pw => ({
+              id: pw.id,
+              service: pw.service,
+              username: this.decrypt(pw.username),
+              password: this.decrypt(pw.password),
+              description: this.decrypt(pw.description)
+            }));
+          })
+          .catch(error => console.error('Error:', error));
     },
     toggleShowPasswords() {
       this.showPasswords = !this.showPasswords;
@@ -95,9 +109,27 @@ export default {
         this.fetchPasswords();
       }
     },
-    hidePasswords() {
-      this.showPasswords = false;
+    editPassword(id) {
+      // Implementieren Sie die Logik zum Bearbeiten eines Passworts
+    },
+    deletePassword(id) {
+      if (typeof id === 'undefined' || id === null) {
+        console.error('Die ID ist undefined oder null.');
+        return;
+      }
+      fetch(`http://localhost:8080/api/passwords/${id}`, {
+        method: 'DELETE'
+      })
+          .then(() => this.fetchPasswords())
+          .catch(error => console.error('Error:', error));
+    },
+
+    clearForm() {
+      this.passwordData = { service: '', username: '', password: '', description: '' };
     }
+  },
+  mounted() {
+    this.fetchPasswords();
   }
 };
 </script>
