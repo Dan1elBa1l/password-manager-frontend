@@ -33,11 +33,15 @@
 
     <!-- Router-View -->
     <RouterView />
+
+    <!-- BottomLineTime Komponente -->
+    <BottomLineTime />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView, useRoute } from 'vue-router';
+import BottomLineTime from './components/BottomLineTime.vue';
 
 const route = useRoute();
 
