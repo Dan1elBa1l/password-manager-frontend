@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>Welcome to your Password-Manager</h1>
-    <!-- Formular zum Hinzufügen von Passwörtern -->
+    <!-- Formular zum Hinzufügen/Bearbeiten von Passwörtern -->
     <form @submit.prevent="submitPassword">
       <input type="text" v-model="passwordData.service" placeholder="Service" required>
       <input type="text" v-model="passwordData.username" placeholder="Username" required>
       <input type="password" v-model="passwordData.password" placeholder="Password" required>
       <input type="text" v-model="passwordData.description" placeholder="Description">
-      <button type="submit">Submit</button>
+      <button type="submit">{{ isEditMode ? 'Update' : 'Submit' }}</button>
     </form>
     <!-- Button, um Passwörter anzuzeigen oder zu verstecken -->
     <button @click="toggleShowPasswords">{{ showPasswords ? 'Hide Passwords' : 'Show Passwords' }}</button>
@@ -31,7 +31,7 @@
           <td>{{ password.password }}</td>
           <td>{{ password.description }}</td>
           <td>
-            <button @click="editPassword(password.id)">Edit</button>
+            <button @click="editPassword(password)">Edit</button>
             <button @click="deletePassword(password.id)">Delete</button>
           </td>
         </tr>
@@ -41,7 +41,6 @@
   </div>
 </template>
 
-
 <script>
 import CryptoJS from 'crypto-js';
 
@@ -49,6 +48,7 @@ export default {
   data() {
     return {
       passwordData: {
+        id: null,
         service: '',
         username: '',
         password: '',
@@ -56,6 +56,7 @@ export default {
       },
       passwords: [],
       showPasswords: false,
+      isEditMode: false,
       secret: import.meta.env.VITE_APP_SECRET // Test-Geheimschlüssel
     };
   },
@@ -74,17 +75,23 @@ export default {
         description: this.encrypt(this.passwordData.description)
       };
 
-      fetch('http://localhost:8080/api/passwords', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      let url = 'http://localhost:8080/api/passwords';
+      let method = 'POST';
+      if (this.isEditMode) {
+        url += `/${this.passwordData.id}`;
+        method = 'PUT';
+      }
+
+      fetch(url, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(passwordData)
       })
           .then(response => response.json())
-          .then(data => {
-            this.passwords.push(data);
+          .then(() => {
+            this.fetchPasswords();
             this.clearForm();
+            this.isEditMode = false;
           })
           .catch(error => console.error('Error:', error));
     },
@@ -92,7 +99,7 @@ export default {
       fetch('http://localhost:8080/api/passwords')
           .then(response => response.json())
           .then(data => {
-            console.log('Empfangene Passwörter:', data); // Protokollieren der empfangenen Daten
+            console.log('Empfangene Passwörter:', data);
             this.passwords = data.map(pw => ({
               id: pw.id,
               service: pw.service,
@@ -109,8 +116,15 @@ export default {
         this.fetchPasswords();
       }
     },
-    editPassword(id) {
-      // Implementieren Sie die Logik zum Bearbeiten eines Passworts
+    editPassword(password) {
+      this.isEditMode = true;
+      this.passwordData = {
+        id: password.id,
+        service: password.service,
+        username: password.username, // Möglicherweise müssen Sie hier entschlüsseln
+        password: password.password, // Möglicherweise müssen Sie hier entschlüsseln
+        description: password.description // Möglicherweise müssen Sie hier entschlüsseln
+      };
     },
     deletePassword(id) {
       if (typeof id === 'undefined' || id === null) {
@@ -123,9 +137,9 @@ export default {
           .then(() => this.fetchPasswords())
           .catch(error => console.error('Error:', error));
     },
-
     clearForm() {
-      this.passwordData = { service: '', username: '', password: '', description: '' };
+      this.passwordData = {id: null, service: '', username: '', password: '', description: ''};
+      this.isEditMode = false;
     }
   },
   mounted() {
