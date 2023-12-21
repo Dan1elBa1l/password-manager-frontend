@@ -18,13 +18,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/passwords">Passwords</RouterLink>
+              <RouterLink class="nav-link" :class="{ active: isActive('/passwords') }" to="/passwords">Passwords</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/credit-card">Credit Cards</RouterLink>
+              <RouterLink class="nav-link" :class="{ active: isActive('/credit-card') }" to="/credit-card">Credit Cards</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/PasswordGenerator">Password Generator</RouterLink>
+              <RouterLink class="nav-link" :class="{ active: isActive('/PasswordGenerator') }" to="/PasswordGenerator">Password Generator</RouterLink>
             </li>
           </ul>
         </div>
@@ -37,7 +37,13 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const isActive = (path) => {
+  return route.path === path;
+};
 </script>
 
 <style scoped>
@@ -64,11 +70,16 @@ import { RouterLink, RouterView } from 'vue-router';
     transition: 0.4s; /* Übergang für den Hover-Effekt */
     border-radius: 5px; /* Rundet die Ecken ab */
     padding: 5px 10px; /* Padding hinzufügen */
-  }
 
-  /* Hover-Effekt für Links */
-  .nav-link:hover {
-    background-color: hsla(0, 0%, 50%, 0.2); /* Grauer Hintergrund beim Hover */
+    /* Hover-Effekt für Links */
+    &:hover {
+      background-color: hsla(0, 0%, 50%, 0.2); /* Grauer Hintergrund beim Hover */
+    }
+
+    /* Stil für aktiven Link */
+    &.active {
+      background-color: hsla(0, 0%, 50%, 0.2); /* Grauer Hintergrund für aktiven Tab */
+    }
   }
 }
 
