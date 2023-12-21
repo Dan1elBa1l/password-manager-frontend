@@ -6,9 +6,10 @@
       <input type="text" v-model="creditCardData.cardNumber" placeholder="Card Number" required>
       <input type="text" v-model="creditCardData.cardHolderName" placeholder="Card Holder Name" required>
       <input type="text" v-model="creditCardData.expirationDate" placeholder="Expiration Date" required>
-      <input type="text" v-model="creditCardData.cvv" placeholder="CVV" required>
+      <input type="text" v-model="creditCardData.cvv" placeholder="CVV" required maxlength="3" pattern="\d{3}">
       <input type="text" v-model="creditCardData.description" placeholder="Description">
-      <button type="submit">{{ isEditMode ? 'Update' : 'Submit' }}</button>
+      <button type="submit" :disabled="!isValidCVV">{{ isEditMode ? 'Update' : 'Submit' }}</button>
+      <p v-if="!isValidCVV && creditCardData.cvv.length > 0" class="error-message"> </p>
     </form>
     <!-- Button, um Kreditkarten anzuzeigen oder zu verstecken -->
     <button @click="toggleShowCreditCards">{{ showCreditCards ? 'Hide Credit Cards' : 'Show Credit Cards' }}</button>
@@ -46,6 +47,13 @@ export default {
       secret: import.meta.env.VITE_APP_SECRET // Test-Geheimschlüssel
     };
   },
+
+  computed: {
+    isValidCVV() {
+      return /^\d{3}$/.test(this.creditCardData.cvv);
+    }
+  },
+
   methods: {
     encrypt(data) {
       return CryptoJS.AES.encrypt(data, this.secret).toString();
