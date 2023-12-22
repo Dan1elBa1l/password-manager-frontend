@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1>Welcome to your Dashboard</h1>
+    <h1>Dashboard</h1>
     <div class="charts-container">
       <!-- Container für das Anzahl-Diagramm -->
       <div class="chart-container">
@@ -10,14 +10,14 @@
       <!-- Container für das Sicherheitsbewertungs-Diagramm -->
       <div class="chart-container">
         <canvas ref="securityChart"></canvas>
-        <p class="chart-description">Sicherheitsbewertung der Passwörter</p>
+        <p class="chart-description">Complexity of your Passwords</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import 'chart.js/auto'; // Automatisches Registrieren der benötigten Komponenten
+import 'chart.js/auto';
 import CryptoJS from 'crypto-js';
 import {Chart} from "chart.js";
 
@@ -77,9 +77,9 @@ export default {
       this.countChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Passwörter', 'Kreditkarten'],
+          labels: ['Passwords', 'Credit Cards'],
           datasets: [{
-            label: 'Anzahl',
+            label: 'Count',
             data: [this.passwords.length, this.creditCards.length],
             backgroundColor: ['rgba(128, 128, 128, 0.2)', 'rgba(192, 192, 192, 0.2)'],
             borderColor: ['rgba(128, 128, 128, 1)', 'rgba(192, 192, 192, 1)'],
@@ -97,9 +97,9 @@ export default {
       this.securityChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Stark', 'Mittel', 'Schwach'],
+          labels: ['Strong', 'Medium', 'Weak'],
           datasets: [{
-            label: 'Sicherheitsbewertung',
+            label: 'Count',
             data: [this.securityRatings.strong, this.securityRatings.medium, this.securityRatings.weak],
             backgroundColor: ['rgba(50, 50, 50, 0.2)', 'rgba(100, 100, 100, 0.2)', 'rgba(150, 150, 150, 0.2)'],
             borderColor: ['rgba(50, 50, 50, 1)', 'rgba(100, 100, 100, 1)', 'rgba(150, 150, 150, 1)'],
@@ -121,12 +121,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1cm;
 }
 
 .charts-container {
   display: flex;
   width: 100%;
-  margin-top: 5cm;
+  margin-top: 2cm;
 }
 
 .chart-container {
