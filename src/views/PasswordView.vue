@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Passwort-Manager</h1>
     <DynamicForm />
   </div>
 </template>

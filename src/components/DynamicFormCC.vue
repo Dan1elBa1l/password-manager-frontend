@@ -1,28 +1,47 @@
 <template>
-  <div>
-    <h1>Welcome to your Credit Card Manager</h1>
-    <!-- Formular zum Hinzufügen/Bearbeiten von Kreditkarten -->
-    <form @submit.prevent="isEditMode ? updateCreditCard() : submitCreditCard()">
-      <input type="text" v-model="creditCardData.cardNumber" placeholder="Card Number" required>
-      <input type="text" v-model="creditCardData.cardHolderName" placeholder="Card Holder Name" required>
-      <input type="text" v-model="creditCardData.expirationDate" placeholder="Expiration Date" required>
-      <input type="text" v-model="creditCardData.cvv" placeholder="CVV" required maxlength="3" pattern="\d{3}">
-      <input type="text" v-model="creditCardData.description" placeholder="Description">
-      <button type="submit" :disabled="!isValidCVV">{{ isEditMode ? 'Update' : 'Submit' }}</button>
-      <p v-if="!isValidCVV && creditCardData.cvv.length > 0" class="error-message"> </p>
-    </form>
-    <!-- Button, um Kreditkarten anzuzeigen oder zu verstecken -->
-    <button @click="toggleShowCreditCards">{{ showCreditCards ? 'Hide Credit Cards' : 'Show Credit Cards' }}</button>
+  <div class="credit-card-manager">
+    <h1 class="page-title">Credit Card Management</h1>
+    <div class="mt-custom d-flex justify-content-center flex-column align-items-center">
+      <!-- Formular zum Hinzufügen/Bearbeiten von Kreditkarten -->
+      <form @submit.prevent="isEditMode ? updateCreditCard() : submitCreditCard()" class="w-100">
+        <input type="text" class="form-control mb-3" v-model="creditCardData.cardNumber" placeholder="Card Number" required>
+        <input type="text" class="form-control mb-3" v-model="creditCardData.cardHolderName" placeholder="Card Holder Name" required>
+        <input type="text" class="form-control mb-3" v-model="creditCardData.expirationDate" placeholder="Expiration Date" required>
+        <input type="text" class="form-control mb-3" v-model="creditCardData.cvv" placeholder="CVV" required maxlength="3" pattern="\d{3}">
+        <input type="text" class="form-control mb-3" v-model="creditCardData.description" placeholder="Description">
+        <button type="submit" class="btn btn-primary" :disabled="!isValidCVV">{{ isEditMode ? 'Update' : 'Submit' }}</button>
+      </form>
+      <!-- Button, um Kreditkarten anzuzeigen oder zu verstecken -->
+      <button @click="toggleShowCreditCards" class="btn btn-secondary mt-2">{{ showCreditCards ? 'Hide Credit Cards' : 'Show Credit Cards' }}</button>
 
-    <!-- Anzeige der abgerufenen Kreditkarten -->
-    <div v-if="showCreditCards">
-      <ul>
-        <li v-for="creditCard in creditCards" :key="creditCard.id">
-          {{ creditCard.cardNumber }} - {{ creditCard.cardHolderName }} - {{ creditCard.expirationDate }} - {{ creditCard.cvv }} - {{ creditCard.description }}
-          <button @click="editCreditCard(creditCard)">Edit</button>
-          <button @click="deleteCreditCard(creditCard.id)">Delete</button>
-        </li>
-      </ul>
+      <!-- Anzeige der abgerufenen Kreditkarten -->
+      <div v-if="showCreditCards" class="mt-3">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Card Number</th>
+            <th>Card Holder Name</th>
+            <th>Expiration Date</th>
+            <th>CVV</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="creditCard in creditCards" :key="creditCard.id">
+            <td>{{ creditCard.cardNumber }}</td>
+            <td>{{ creditCard.cardHolderName }}</td>
+            <td>{{ creditCard.expirationDate }}</td>
+            <td>{{ creditCard.cvv }}</td>
+            <td>{{ creditCard.description }}</td>
+            <td>
+              <button @click="editCreditCard(creditCard)" class="btn btn-warning btn-sm">Edit</button>
+              <button @click="deleteCreditCard(creditCard.id)" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -164,3 +183,72 @@ export default {
   }
 };
 </script>
+
+<style>
+.credit-card-manager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1cm;
+}
+
+.page-title {
+  margin-bottom: 0.1cm;
+}
+
+.mt-custom {
+  margin-top: 2cm;
+}
+
+input[type="text"],
+input[type="password"] {
+  margin-bottom: 0.5rem;
+  background-color: #f7f7f7;
+  border-color: #d1d1d1;
+  color: #333;
+  font-size: 1.1em;
+  padding: 0.5em; /* Zusätzlicher Innenabstand für bessere Lesbarkeit */
+}
+
+button {
+  margin-top: 0.5rem;
+  background-color: #e9ecef;
+  border-color: #d1d1d1;
+  color: #333;
+  padding: 0.5em 1em;
+  border-radius: 0.25em; /* Leicht abgerundete Ecken für Buttons */
+  font-size: 1em; /* Anpassung der Schriftgröße für bessere Lesbarkeit */
+}
+
+.btn-primary, .btn-secondary {
+  cursor: pointer; /* Cursor-Stil als Hinweis auf Klickbarkeit */
+  transition: background-color 0.3s, border-color 0.3s; /* Glatter Übergang für Hover-Effekte */
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  background-color: #d6d6d6; /* Farbänderung beim Überfahren mit der Maus */
+  border-color: #c0c0c0;
+}
+
+.btn-warning, .btn-danger {
+}
+
+.btn-warning:hover, .btn-danger:hover {
+}
+
+/* Hinzugefügte Tabellenstile */
+.table {
+  color: #333; /* Dunkler Grauton für den Text */
+}
+
+.table th {
+  background-color: #f7f7f7; /* Heller Grauton für den Hintergrund */
+  border-bottom: 2px solid #d1d1d1; /* Dunklerer Grauton für den unteren Rand */
+}
+
+.table td {
+  background-color: #ffffff; /* Weißer Hintergrund */
+}
+
+
+</style>
