@@ -26,4 +26,4 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        run: npm run test # Stellen Sie sicher, dass dies Ihr Testskript ausführt
+        run: npm run test:unit # Stellen Sie sicher, dass dies Ihr Testskript ausführt
