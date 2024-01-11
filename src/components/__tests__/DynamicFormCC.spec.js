@@ -1,13 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import DynamicFormCC from '@/components/DynamicFormCC.vue';
-
-// eslint-disable-next-line no-undef
-vi.stubGlobal('fetch', vi.fn(() =>
-    Promise.resolve({
-        json: () => Promise.resolve([])
-    })
-));
+import DynamicFormCC from '@/components/DynamicFormCC.vue'; // Pfad anpassen
 
 describe('DynamicFormCC', () => {
     it('sollte die Komponente korrekt erstellen', () => {
