@@ -2,12 +2,10 @@
   <div class="dashboard">
     <h1>Dashboard</h1>
     <div class="charts-container">
-      <!-- Container für das Anzahl-Diagramm -->
       <div class="chart-container">
         <canvas ref="countChart"></canvas>
         <p class="chart-description">Number of Passwords and Credit Cards saved</p>
       </div>
-      <!-- Container für das Sicherheitsbewertungs-Diagramm -->
       <div class="chart-container">
         <canvas ref="securityChart"></canvas>
         <p class="chart-description">Complexity of your Passwords</p>
@@ -33,7 +31,7 @@ export default {
       },
       countChart: null,
       securityChart: null,
-      secret: import.meta.env.VITE_APP_SECRET // Test-Geheimschlüssel für die Entschlüsselung
+      secret: import.meta.env.VITE_APP_SECRET
     };
   },
   mounted() {

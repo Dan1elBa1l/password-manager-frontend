@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DynamicForm from '@/components/DynamicFormPW.vue'; // Pfad anpassen, falls nötig
+import DynamicForm from '@/components/DynamicFormPW.vue';
 
 export default {
   components: {
@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style scoped>
-/* Ihre Styles hier */
+
 </style>

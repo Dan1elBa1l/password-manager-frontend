@@ -2,7 +2,6 @@
   <div class="credit-card-manager">
     <h1 class="page-title">Credit Card Management</h1>
     <div class="mt-custom d-flex justify-content-center flex-column align-items-center">
-      <!-- Formular zum Hinzufügen/Bearbeiten von Kreditkarten -->
       <form @submit.prevent="isEditMode ? updateCreditCard() : submitCreditCard()" class="w-100">
         <input type="text" class="form-control mb-3" v-model="creditCardData.cardNumber" placeholder="Card Number" required>
         <input type="text" class="form-control mb-3" v-model="creditCardData.cardHolderName" placeholder="Card Holder Name" required>
@@ -11,10 +10,10 @@
         <input type="text" class="form-control mb-3" v-model="creditCardData.description" placeholder="Description">
         <button type="submit" class="btn btn-primary" :disabled="!isValidCVV">{{ isEditMode ? 'Update' : 'Submit' }}</button>
       </form>
-      <!-- Button, um Kreditkarten anzuzeigen oder zu verstecken -->
+
       <button @click="toggleShowCreditCards" class="btn btn-secondary mt-2">{{ showCreditCards ? 'Hide Credit Cards' : 'Show Credit Cards' }}</button>
 
-      <!-- Anzeige der abgerufenen Kreditkarten -->
+
       <div v-if="showCreditCards" class="mt-3">
         <table class="table">
           <thead>
@@ -63,7 +62,7 @@ export default {
       creditCards: [],
       showCreditCards: false,
       isEditMode: false,
-      secret: import.meta.env.VITE_APP_SECRET // Test-Geheimschlüssel
+      secret: import.meta.env.VITE_APP_SECRET
     };
   },
 
@@ -139,11 +138,11 @@ export default {
       this.isEditMode = true;
       this.creditCardData = {
         id: creditCard.id,
-        cardNumber: creditCard.cardNumber, // Möglicherweise müssen Sie hier entschlüsseln
-        cardHolderName: creditCard.cardHolderName, // Möglicherweise müssen Sie hier entschlüsseln
-        expirationDate: creditCard.expirationDate, // Möglicherweise müssen Sie hier entschlüsseln
-        cvv: creditCard.cvv, // Möglicherweise müssen Sie hier entschlüsseln
-        description: creditCard.description // Möglicherweise müssen Sie hier entschlüsseln
+        cardNumber: creditCard.cardNumber,
+        cardHolderName: creditCard.cardHolderName,
+        expirationDate: creditCard.expirationDate,
+        cvv: creditCard.cvv,
+        description: creditCard.description
       };
     },
     updateCreditCard() {
@@ -207,7 +206,7 @@ input[type="password"] {
   border-color: #d1d1d1;
   color: #333;
   font-size: 1.1em;
-  padding: 0.5em; /* Zusätzlicher Innenabstand für bessere Lesbarkeit */
+  padding: 0.5em;
 }
 
 button {
@@ -216,17 +215,17 @@ button {
   border-color: #d1d1d1;
   color: #333;
   padding: 0.5em 1em;
-  border-radius: 0.25em; /* Leicht abgerundete Ecken für Buttons */
-  font-size: 1em; /* Anpassung der Schriftgröße für bessere Lesbarkeit */
+  border-radius: 0.25em;
+  font-size: 1em;
 }
 
 .btn-primary, .btn-secondary {
-  cursor: pointer; /* Cursor-Stil als Hinweis auf Klickbarkeit */
-  transition: background-color 0.3s, border-color 0.3s; /* Glatter Übergang für Hover-Effekte */
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .btn-primary:hover, .btn-secondary:hover {
-  background-color: #d6d6d6; /* Farbänderung beim Überfahren mit der Maus */
+  background-color: #d6d6d6;
   border-color: #c0c0c0;
 }
 
@@ -236,18 +235,18 @@ button {
 .btn-warning:hover, .btn-danger:hover {
 }
 
-/* Hinzugefügte Tabellenstile */
+
 .table {
-  color: #333; /* Dunkler Grauton für den Text */
+  color: #333;
 }
 
 .table th {
-  background-color: #f7f7f7; /* Heller Grauton für den Hintergrund */
-  border-bottom: 2px solid #d1d1d1; /* Dunklerer Grauton für den unteren Rand */
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #d1d1d1;
 }
 
 .table td {
-  background-color: #ffffff; /* Weißer Hintergrund */
+  background-color: #ffffff;
 }
 
 

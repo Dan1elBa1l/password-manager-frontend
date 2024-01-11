@@ -18,10 +18,7 @@ export default {
     },
   },
   created() {
-    // Rufe die Methode updateLastShownTime() beim Erstellen der Komponente auf
     this.updateLastShownTime();
-
-    // Hör auf den Event 'showPasswords', um die Zeit zu aktualisieren, wenn der Button geklickt wird
     this.$root.$on('showPasswords', this.updateLastShownTime);
   },
 };
@@ -39,6 +36,5 @@ export default {
   width: 100%;
   color: black;
   border-radius: 0; /* Zurücksetzen der Eckenrundung */
-  /* Füge hier weitere gewünschte Stile hinzu */
 }
 </style>

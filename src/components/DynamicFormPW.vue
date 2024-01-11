@@ -3,7 +3,7 @@
     <h1 class="page-title">Password-Management</h1>
   </div>
   <div class="mt-custom d-flex justify-content-center flex-column align-items-center">
-    <!-- Formular zum Hinzufügen/Bearbeiten von Passwörtern -->
+
     <form @submit.prevent="submitPassword" class="w-50">
       <input type="text" class="form-control mb-2" v-model="passwordData.service" placeholder="Service" required>
       <input type="text" class="form-control mb-2" v-model="passwordData.username" placeholder="Username" required>
@@ -11,10 +11,9 @@
       <input type="text" class="form-control mb-2" v-model="passwordData.description" placeholder="Description">
       <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Submit' }}</button>
     </form>
-    <!-- Button, um Passwörter anzuzeigen oder zu verstecken -->
+
     <button @click="toggleShowPasswords" class="btn btn-secondary mt-2">{{ showPasswords ? 'Hide Passwords' : 'Show Passwords' }}</button>
 
-    <!-- Tabelle der Passwörter -->
     <div v-if="showPasswords" class="mt-3">
       <table class="table">
         <thead>
@@ -59,7 +58,7 @@ export default {
       passwords: [],
       showPasswords: false,
       isEditMode: false,
-      secret: import.meta.env.VITE_APP_SECRET // Test-Geheimschlüssel
+      secret: import.meta.env.VITE_APP_SECRET
     };
   },
   methods: {
@@ -123,9 +122,9 @@ export default {
       this.passwordData = {
         id: password.id,
         service: password.service,
-        username: password.username, // Möglicherweise müssen Sie hier entschlüsseln
-        password: password.password, // Möglicherweise müssen Sie hier entschlüsseln
-        description: password.description // Möglicherweise müssen Sie hier entschlüsseln
+        username: password.username,
+        password: password.password,
+        description: password.description
       };
     },
     deletePassword(id) {
@@ -154,78 +153,76 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1cm; /* Stellt den gleichen Abstand wie bei .dashboard ein */
+  margin-top: 1cm;
 }
 
 .page-title {
   margin-bottom: 0.1cm;
 }
 
-/* Benutzerdefinierte Klasse für spezifischen Abstand */
+
 .mt-custom {
   margin-top: 2cm;
 }
 
-/* Stil für die Formularelemente */
+
 input[type="text"],
 input[type="password"] {
   margin-bottom: 0.5rem;
-  background-color: #f7f7f7; /* Heller Grauton für den Hintergrund */
-  border-color: #d1d1d1; /* Dunklerer Grauton für den Rand */
-  color: #333; /* Dunkler Grauton für den Text */
+  background-color: #f7f7f7;
+  border-color: #d1d1d1;
+  color: #333;
 }
 
-/* Stil für die Buttons */
+
 button {
   margin-top: 0.5rem;
 }
 
-/* Stil für den Submit-Button, gleiches Grau wie 'Show Passwords' */
+
 .btn-primary {
-  background-color: #e9ecef; /* Mittlerer Grauton */
-  border-color: #d1d1d1; /* Dunklerer Grauton für den Rand */
-  color: #333; /* Dunkler Grauton für den Text */
+  background-color: #e9ecef;
+  border-color: #d1d1d1;
+  color: #333;
 }
 
-/* Stil für die Tabelle */
+
 .table {
-  color: #333; /* Dunkler Grauton für den Text */
+  color: #333;
 }
 
 .table th {
-  background-color: #f7f7f7; /* Heller Grauton für den Hintergrund */
-  border-bottom: 2px solid #d1d1d1; /* Dunklerer Grauton für den unteren Rand */
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #d1d1d1;
 }
 
 .table td {
-  background-color: #ffffff; /* Weißer Hintergrund */
+  background-color: #ffffff;
 }
 
-/* Button-Stil für Edit-Aktion */
+
 .btn-warning {
-  color: #fff; /* Weißer Text */
-  background-color: #6c757d; /* Dunkelgrau */
-  border-color: #6c757d; /* Dunkelgrau */
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
-/* Button-Stil für Delete-Aktion, dunkler als Edit */
+
 .btn-danger {
-  color: #fff; /* Weißer Text */
-  background-color: #343a40; /* Sehr dunkles Grau */
-  border-color: #343a40; /* Sehr dunkles Grau */
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
 }
 
-/* Hover-Effekte für Edit und Delete Buttons */
+
 .btn-warning:hover {
-  background-color: #5a6268; /* Etwas dunkleres Grau */
-  border-color: #545b62; /* Etwas dunkleres Grau */
+  background-color: #5a6268;
+  border-color: #545b62;
 }
 
 .btn-danger:hover {
-  background-color: #23272b; /* Noch dunkleres Grau */
-  border-color: #1d2124; /* Noch dunkleres Grau */
+  background-color: #23272b;
+  border-color: #1d2124;
 }
 
-
-/* Optional: Weitere Stile für Hover-Effekte und Fokus-Zustände */
 </style>

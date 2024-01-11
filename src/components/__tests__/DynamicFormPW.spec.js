@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import DynamicFormPW from '@/components/DynamicFormPW.vue'; // Korrigieren Sie den Pfad entsprechend
+import DynamicFormPW from '@/components/DynamicFormPW.vue';
 
 // Mock für `fetch`
 vi.stubGlobal('fetch', vi.fn(() =>
     Promise.resolve({
-        json: () => Promise.resolve([]) // Leeres Array als Mock-Antwort
+        json: () => Promise.resolve([])
     })
 ));
 
@@ -27,7 +27,7 @@ describe('DynamicFormPW', () => {
             data() {
                 return {
                     showPasswords: true,
-                    passwords: [] // Fügen Sie hier mögliche Mock-Daten hinzu
+                    passwords: []
                 };
             }
         });

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DynamicFormCC from "@/components/DynamicFormCC.vue"; // Stellen Sie sicher, dass der Pfad korrekt ist
+import DynamicFormCC from "@/components/DynamicFormCC.vue";
 
 export default {
   components: {
@@ -13,7 +13,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Ihre Styles hier */
-</style>

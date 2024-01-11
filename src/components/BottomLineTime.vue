@@ -35,7 +35,6 @@ export default {
   left: 0;
   width: 100%;
   color: black;
-  border-radius: 0; /* Zurücksetzen der Eckenrundung */
-  /* Füge hier weitere gewünschte Stile hinzu */
+  border-radius: 0;
 }
 </style>
